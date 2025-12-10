@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>18.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{f8c568d4-fd48-484f-987e-3cc2c466b40e}</ProjectGuid>
+    <ProjectGuid>{f3499560-6336-4b8c-83e0-540b55922ca8}</ProjectGuid>
     <RootNamespace>NexusBankCLI</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
