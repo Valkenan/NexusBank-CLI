@@ -43,6 +43,6 @@ The system utilizes `std::vector<sClient>` to hold the dataset in RAM.
 1.  Clone the repository.
 2.  Compile using g++:
     ```bash
-    g++ main.cpp -o NexusBank
+    g++ NexusBank_CLI.cpp -o NexusBank
     ```
 3.  Run the executable. Ensure `Clients.txt` is created in the same directory.
