@@ -2,7 +2,7 @@
 
 **A high-performance, file-based core banking system implemented in C++.**
 
-![C++](https://img.shields.io/badge/Language-C++17-blue.svg) ![Platform](https://img.shields.io/badge/Platform-Windows-lightgrey.svg) ![License](https://img.shields.io/badge/License-MIT-green.svg)
+![C++](https://img.shields.io/badge/Language-C++17-blue.svg) ![Platform](https://img.shields.io/badge/Platform-Windows-lightgrey.svg)
 
 ## 📖 Overview
 
