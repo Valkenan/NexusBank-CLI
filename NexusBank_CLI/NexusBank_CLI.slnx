@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="NexusBank_CLI.vcxproj" />
+  <Project Path="NexusBank_CLI.vcxproj" Id="f3499560-6336-4b8c-83e0-540b55922ca8" />
 </Solution>
