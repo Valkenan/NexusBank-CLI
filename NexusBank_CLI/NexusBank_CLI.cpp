@@ -1,8 +1,3 @@
-/*
-CopyRight ProgrammingAdvices.com
-Mohammed Abu-Hadhoud
-*/
-
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -61,8 +56,8 @@ enum enMainMenuePermissions
     pManageUsers = 64
 };
 
-const string ClientsFileName = "Clients.txt";
-const string UsersFileName = "Users.txt";
+const string ClientsFileName = "..\\..\\Data\\Clients.txt";
+const string UsersFileName = "..\\..\\Data\\Users.txt";
 
 stUser CurrentUser;
 
@@ -86,24 +81,23 @@ vector<string> SplitString(string S1, string Delim)
 {
     vector<string> vString;
 
-    short pos = 0;
-    string sWord; // define a string variable
+    size_t pos = 0;
+    string sWord;
 
-    // use find() function to get the position of the delimiters
     while ((pos = S1.find(Delim)) != std::string::npos)
     {
-        sWord = S1.substr(0, pos); // store the word
+        sWord = S1.substr(0, pos);
         if (sWord != "")
         {
             vString.push_back(sWord);
         }
 
-        S1.erase(0, pos + Delim.length()); /* erase() until positon and move to next word. */
+        S1.erase(0, pos + Delim.length());
     }
 
     if (S1 != "")
     {
-        vString.push_back(S1); // it adds last word of the string.
+        vString.push_back(S1);
     }
 
     return vString;
@@ -134,7 +128,7 @@ sClient ConvertLinetoRecord(string Line, string Seperator = "#//#")
     Client.PinCode = vClientData[1];
     Client.Name = vClientData[2];
     Client.Phone = vClientData[3];
-    Client.AccountBalance = stod(vClientData[4]); // cast string to double
+    Client.AccountBalance = stod(vClientData[4]);
 
     return Client;
 }
@@ -182,7 +176,7 @@ bool ClientExistsByAccountNumber(string AccountNumber, string FileName)
     vector<sClient> vClients;
 
     fstream MyFile;
-    MyFile.open(FileName, ios::in); // read Mode
+    MyFile.open(FileName, ios::in);
 
     if (MyFile.is_open())
     {
@@ -210,7 +204,7 @@ bool ClientExistsByAccountNumber(string AccountNumber, string FileName)
 bool UserExistsByUsername(string Username, string FileName)
 {
     fstream MyFile;
-    MyFile.open(FileName, ios::in); // read Mode
+    MyFile.open(FileName, ios::in);
 
     if (MyFile.is_open())
     {
@@ -239,7 +233,6 @@ sClient ReadNewClient()
 
     cout << "Enter Account Number? ";
 
-    // Usage of std::ws will extract allthe whitespace character
     getline(cin >> ws, Client.AccountNumber);
 
     while (ClientExistsByAccountNumber(Client.AccountNumber, ClientsFileName))
@@ -335,7 +328,6 @@ stUser ReadNewUser()
 
     cout << "Enter Username? ";
 
-    // Usage of std::ws will extract allthe whitespace character
     getline(cin >> ws, User.UserName);
 
     while (UserExistsByUsername(User.UserName, UsersFileName))
@@ -357,7 +349,7 @@ vector<stUser> LoadUsersDataFromFile(string FileName)
     vector<stUser> vUsers;
 
     fstream MyFile;
-    MyFile.open(FileName, ios::in); // read Mode
+    MyFile.open(FileName, ios::in);
 
     if (MyFile.is_open())
     {
@@ -382,7 +374,7 @@ vector<sClient> LoadCleintsDataFromFile(string FileName)
     vector<sClient> vClients;
 
     fstream MyFile;
-    MyFile.open(FileName, ios::in); // read Mode
+    MyFile.open(FileName, ios::in);
 
     if (MyFile.is_open())
     {
@@ -656,7 +648,7 @@ bool MarkUserForDeleteByUsername(string Username, vector<stUser>& vUsers)
 vector<sClient> SaveCleintsDataToFile(string FileName, vector<sClient> vClients)
 {
     fstream MyFile;
-    MyFile.open(FileName, ios::out); // overwrite
+    MyFile.open(FileName, ios::out);
 
     string DataLine;
 
@@ -666,7 +658,6 @@ vector<sClient> SaveCleintsDataToFile(string FileName, vector<sClient> vClients)
         {
             if (C.MarkForDelete == false)
             {
-                // we only write records that are not marked for delete.
                 DataLine = ConvertRecordToLine(C);
                 MyFile << DataLine << endl;
             }
@@ -681,7 +672,7 @@ vector<sClient> SaveCleintsDataToFile(string FileName, vector<sClient> vClients)
 vector<stUser> SaveUsersDataToFile(string FileName, vector<stUser> vUsers)
 {
     fstream MyFile;
-    MyFile.open(FileName, ios::out); // overwrite
+    MyFile.open(FileName, ios::out);
 
     string DataLine;
 
@@ -691,7 +682,6 @@ vector<stUser> SaveUsersDataToFile(string FileName, vector<stUser> vUsers)
         {
             if (U.MarkForDelete == false)
             {
-                // we only write records that are not marked for delete.
                 DataLine = ConvertUserRecordToLine(U);
                 MyFile << DataLine << endl;
             }
@@ -735,7 +725,6 @@ void AddNewClients()
     char AddMore = 'Y';
     do
     {
-        // system("cls");
         cout << "Adding New Client:\n\n";
 
         AddNewClient();
@@ -751,7 +740,6 @@ void AddNewUsers()
     char AddMore = 'Y';
     do
     {
-        // system("cls");
         cout << "Adding New User:\n\n";
 
         AddNewUser();
@@ -778,7 +766,6 @@ bool DeleteClientByAccountNumber(string AccountNumber, vector<sClient>& vClients
             MarkClientForDeleteByAccountNumber(AccountNumber, vClients);
             SaveCleintsDataToFile(ClientsFileName, vClients);
 
-            // Refresh Clients
             vClients = LoadCleintsDataFromFile(ClientsFileName);
 
             cout << "\n\nClient Deleted Successfully.";
@@ -815,7 +802,6 @@ bool DeleteUserByUsername(string Username, vector<stUser>& vUsers)
             MarkUserForDeleteByUsername(Username, vUsers);
             SaveUsersDataToFile(UsersFileName, vUsers);
 
-            // Refresh Clients
             vUsers = LoadUsersDataFromFile(UsersFileName);
 
             cout << "\n\nUser Deleted Successfully.";
@@ -1120,7 +1106,6 @@ void ShowWithDrawScreen()
     cout << "\nPlease enter withdraw amount? ";
     cin >> Amount;
 
-    // Validate that the amount does not exceeds the balance
     while (Amount > Client.AccountBalance)
     {
         cout << "\nAmount Exceeds the balance, you can withdraw up to : " << Client.AccountBalance << endl;
@@ -1374,7 +1359,6 @@ void PerfromMainMenueOption(enMainMenueOptions MainMenueOption)
 
     case enMainMenueOptions::eExit:
         system("cls");
-        // ShowEndScreen();
         Login();
 
         break;
@@ -1440,7 +1424,6 @@ void Login()
 }
 
 int main()
-
 {
     Login();
 
